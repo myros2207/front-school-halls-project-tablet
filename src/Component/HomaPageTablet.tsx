@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Select from "react-select";
-import {Box, Button, Center, Container, Flex, Select as SelectChakra} from '@chakra-ui/react'
+import {Box, Button, Center, Container, Flex, Select as SelectChakra, Text} from '@chakra-ui/react'
 import axios from "axios";
+import {color1, color2, color3, color4} from "./Color";
 
-function TestDrop() {
+function HomePageTablet() {
 
     const [teachers, setTeachers] = useState<any>([])
     const [classes, setClasses] = useState<any>([])
@@ -73,6 +74,7 @@ function TestDrop() {
     const chooseTeacher = (e: any) => {
         setChosenTeacher(e.value)
         console.log(chosenTeacher)
+
     }
 
     const chooseClass = (e: any) => {
@@ -84,64 +86,77 @@ function TestDrop() {
 
     const reactSelectStyles = {
         control: (base: any) => ({
-            width: "10rem",
-            border: "2px solid orange"
+            width: "20vw",
+            border: "2px solid ",
+            // margin: "2rem",
+            height: "10vh",
+            borderRadius: "5px"
         }),
         menu: (base: any) => ({
             // width: "10rem",
-            overflow: "scroll"
         }),
     }
+    
+    
 
     return (
         <div className="App">
             <div style={{display: "block", margin: "0"}}>
-                <Center w={"100vw"} flexDirection={"column"}>
-                    <Box overflow={"auto"} w={"100vw"} background={"green"} h={"50vh"}>
+                <Center background={color1} w={"100vw"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
+                    <Box overflow={"auto"} w={"100vw"}  h={"85vh"}>
                         <h1>Book hall history</h1>
-                        <Box h={"5rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
+                        <Box margin={"auto"} h={"5rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            1
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            2
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            3
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            4
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            5
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            6
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            7
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                            7
+                        </Box>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
 
                         </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
 
                         </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
+                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
 
                         </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
-
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
-
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
-
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
-
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
-
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={"purple"}>
-
-                        </Box>
-
 
 
                     </Box>
-                    <Flex h={"10vh"}>
-                        <Box>
-                            <Flex>
-                            {/*    @ts-ignore*/}
-                            <Select onChange={chooseTeacher} options={teachers} isSearchable={true} styles={reactSelectStyles}/>
-                                {/*    @ts-ignore*/}
-                            <Select onChange={chooseClass} options={classes} isSearchable={true} styles={reactSelectStyles}/>
-                                {/*    @ts-ignore*/}
-                            <Select onChange={chooseHalls} options={halls} isSearchable={true} styles={reactSelectStyles}/>
-                            </Flex>
+                    <Flex w={"100%"} h={"100%"} background={color3} justifyContent={"center"}  >
+                        <Box m={"1rem"}>
+                            <Text>Imię</Text>
+                        <Select onChange={chooseTeacher} options={teachers} isSearchable={true}
+                                     styles={reactSelectStyles}/>
                         </Box>
-                        <Button h={"5rem"} onClick={BookHall}>book</Button>
+                        <Box m={"1rem"}>
+                            <Text>Sala</Text>
+                            <Select onChange={chooseHalls} options={halls} isSearchable={true} styles={reactSelectStyles}/>
+                        </Box>
+                        <Box m={"1rem"}>
+                            <Text>Klasa</Text>
+                        <Select onChange={chooseClass} options={classes} isSearchable={true}
+                                styles={reactSelectStyles}/>
+                        </Box>
+                        <Button mt={"2.5rem"} h={"10vh"} onClick={BookHall}>book</Button>
                     </Flex>
                 </Center>
             </div>
@@ -149,4 +164,4 @@ function TestDrop() {
     );
 }
 
-export default TestDrop;
+export default HomePageTablet;

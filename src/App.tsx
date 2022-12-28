@@ -1,13 +1,16 @@
 import React from 'react';
-import HomePage from "./Component/HomePage";
-import TestDrop from './Component/TestDrop';
+import axios from "axios";
+import HomePageTablet from "./Component/HomaPageTablet";
+// require("dotenv").config()
 
 
 function App() {
+    // @ts-ignore
+    axios.defaults.headers.common['ApiKey'] = process.env.APIKEY
+    
   return (
     <div className="App">
-      {/*<HomePage/>*/}
-        <TestDrop/>
+        <HomePageTablet/>
     </div>
   );
 }
