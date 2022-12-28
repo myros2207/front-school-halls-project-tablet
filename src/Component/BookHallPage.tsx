@@ -3,6 +3,7 @@ import {IClasses, IHalls, ITeacher} from "./IBookHall";
 import BookHallComponent from "./BookHallComponent";
 import { useEffect } from 'react';
 import axios from "axios";
+import {Select} from "@chakra-ui/react";
 
 const BookHallPage = () => {
 
@@ -40,8 +41,9 @@ const BookHallPage = () => {
         <div>
             {
                 all.map((allInfo) =>
-                    // @ts-ignore
+                     //@ts-ignore
                     <BookHallComponent TeacherId={allInfo.teacher.map(t=>t.teacherId)} TeacherFirstName={allInfo.teacher.map(t=>t.teacherFirstName)} TeacherSecondName={allInfo.teacher.map(t=>t.teacherSecondName)} ClassId={allInfo.classes.map(c=>c.classId)} ClassName={allInfo.classes.map(c=>c.className)} ClassProfession={allInfo.classes.map(c=>c.classProfession)} ClassStudentsAmount={allInfo.classes.map(c=>c.classStudentsAmount)} HallId={allInfo.halls.map(h=>h.hallId)} HallNumber={allInfo.halls.map(h=>h.hallNumber)} HallIsFree={allInfo.halls.map(h=>h.hallIsFree)}/>
+
                 )
                 }
 
