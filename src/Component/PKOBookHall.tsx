@@ -3,8 +3,9 @@ import Select from "react-select";
 import {Box, Button, Center, Container, Flex, Select as SelectChakra, Text} from '@chakra-ui/react'
 import axios from "axios";
 import {color1, color2, color3, color4} from "./Color";
+import {MockHistoryBookHall} from "./mock";
 
-function HomePageTablet() {
+function PKOBookHall() {
 
     const [teachers, setTeachers] = useState<any>([])
     const [classes, setClasses] = useState<any>([])
@@ -53,13 +54,25 @@ function HomePageTablet() {
 
         const arr = []
         for (let i = 0; i < response.data.length; i++) {
-            arr.push({
-                    label: response.data[i].hallNumber + " " + response.data[i].hallType,
-                    value: response.data[i].hallId
-                }
-            )
+            if (response.data[i].building.buildingName === "PKO") {
+
+
+                arr.push({
+                        label: response.data[i].hallNumber + " " + response.data[i].hallType,
+                        value: response.data[i].hallId
+                    }
+                )
+            }
         }
+        // if  (response.data.building.buildingName == "PKO"){
+        //     console.log("Ok")
+        // }
         setHalls(arr)
+        console.log(arr)
+        // console.log(response.data.hallid)
+        // @ts-ignore
+        console.log(response.data.map((m) => m.building.buildingName))
+        console.log(response.data[0].building)
     }
 
     const BookHall = async () => {
@@ -69,7 +82,6 @@ function HomePageTablet() {
             classId: chosenClass,
         })
         console.log(response.data)
-
     }
     const chooseTeacher = (e: any) => {
         setChosenTeacher(e.value)
@@ -96,67 +108,42 @@ function HomePageTablet() {
             // width: "10rem",
         }),
     }
-    
-    
+
 
     return (
         <div className="App">
             <div style={{display: "block", margin: "0"}}>
-                <Center background={color1} w={"100vw"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
-                    <Box overflow={"auto"} w={"100vw"}  h={"85vh"}>
-                        <h1>Book hall history</h1>
+                <Center background={color1} w={"100%"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
+                    <Box overflow={"auto"} w={"100%"} h={"85vh"}>
+                        <h1>Book hall history PKO</h1>
                         <Box margin={"auto"} h={"5rem"} borderRadius={"10px"} w={"95%"} background={color2}>
                             1
                         </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            2
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            3
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            4
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            5
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            6
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            7
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            7
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-
-                        </Box>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-
-                        </Box>
-
-
+                        {
+                            MockHistoryBookHall.map((mock) =>
+                                <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
+                                    <h2>{mock.firstName} {mock.secondName}</h2>
+                                </Box>
+                            )
+                        }
                     </Box>
-                    <Flex w={"100%"} h={"100%"} background={color3} justifyContent={"center"}  >
-                        <Box m={"1rem"}>
+                    <Flex p={"1rem"} w={"99vw"} h={"100%"} background={color3} justifyContent={"center"}>
+                        <Box>
                             <Text>Imię</Text>
-                        <Select onChange={chooseTeacher} options={teachers} isSearchable={true}
-                                     styles={reactSelectStyles}/>
+                            <Select onChange={chooseTeacher} options={teachers} isSearchable={true}
+                                    styles={reactSelectStyles}/>
                         </Box>
-                        <Box m={"1rem"}>
+                        <Box>
                             <Text>Sala</Text>
-                            <Select onChange={chooseHalls} options={halls} isSearchable={true} styles={reactSelectStyles}/>
+                            <Select onChange={chooseHalls} options={halls} isSearchable={true}
+                                    styles={reactSelectStyles}/>
                         </Box>
-                        <Box m={"1rem"}>
+                        <Box>
                             <Text>Klasa</Text>
-                        <Select onChange={chooseClass} options={classes} isSearchable={true}
-                                styles={reactSelectStyles}/>
+                            <Select onChange={chooseClass} options={classes} isSearchable={true}
+                                    styles={reactSelectStyles}/>
                         </Box>
-                        <Button mt={"2.5rem"} h={"10vh"} onClick={BookHall}>book</Button>
+                        <Button h={"10vh"} onClick={BookHall}>book</Button>
                     </Flex>
                 </Center>
             </div>
@@ -164,4 +151,4 @@ function HomePageTablet() {
     );
 }
 
-export default HomePageTablet;
+export default PKOBookHall;
