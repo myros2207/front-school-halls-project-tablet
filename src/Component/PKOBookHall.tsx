@@ -3,7 +3,7 @@ import Select from "react-select";
 import {Box, Button, Center, Container, Flex, Select as SelectChakra, Text} from '@chakra-ui/react'
 import axios from "axios";
 import {color1, color2, color3, color4} from "./Color";
-import {MockHistoryBookHall} from "./mock";
+import {IHistory, MockHistoryBookHall} from "./mock";
 
 function PKOBookHall() {
 
@@ -13,6 +13,7 @@ function PKOBookHall() {
     const [chosenTeacher, setChosenTeacher] = useState("")
     const [chosenClass, setChosenClass] = useState("")
     const [chosenHalls, setChosenHalls] = useState("")
+
 
     useEffect(() => {
         GetClasses()
@@ -82,6 +83,7 @@ function PKOBookHall() {
             classId: chosenClass,
         })
         console.log(response.data)
+
     }
     const chooseTeacher = (e: any) => {
         setChosenTeacher(e.value)
@@ -122,7 +124,7 @@ function PKOBookHall() {
                         {
                             MockHistoryBookHall.map((mock) =>
                                 <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                                    <h2>{mock.firstName} {mock.secondName}</h2>
+                                    <h2>{mock.name} </h2>
                                 </Box>
                             )
                         }

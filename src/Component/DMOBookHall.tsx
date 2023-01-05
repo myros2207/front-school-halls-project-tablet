@@ -3,7 +3,7 @@ import Select from "react-select";
 import {Box, Button, Center, Container, Flex, Select as SelectChakra, Text} from '@chakra-ui/react'
 import axios from "axios";
 import {color1, color2, color3, color4} from "./Color";
-import {MockHistoryBookHall} from "./mock";
+import {IHistory, MockHistoryBookHall} from "./mock";
 
 function DMOBookHall() {
 
@@ -13,13 +13,19 @@ function DMOBookHall() {
     const [chosenTeacher, setChosenTeacher] = useState("")
     const [chosenClass, setChosenClass] = useState("")
     const [chosenHalls, setChosenHalls] = useState("")
+    const [bookLesson, setBookLesson] = useState<IHistory[]>([])
+    const [history, setHistory] = useState<IHistory[]>([])
 
     useEffect(() => {
         GetClasses()
         GetTeachers()
         GetHalls()
+        GetHistory()
     }, [])
 
+    const GetHistory = () => {
+        setHistory(MockHistoryBookHall)
+    }
     const GetTeachers = async () => {
         const response = await axios.get("http://localhost:3000/teachers")
 
@@ -48,15 +54,11 @@ function DMOBookHall() {
         }
         setClasses(arr)
     }
-
     const GetHalls = async () => {
         const response = await axios.get("http://localhost:3000/halls")
-
         const arr = []
         for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].building.buildingName === "DMO") {
-
-
                 arr.push({
                         label: response.data[i].hallNumber + " " + response.data[i].hallType,
                         value: response.data[i].hallId
@@ -64,15 +66,7 @@ function DMOBookHall() {
                 )
             }
         }
-        // if  (response.data.building.buildingName == "PKO"){
-        //     console.log("Ok")
-        // }
         setHalls(arr)
-        console.log(arr)
-        // console.log(response.data.hallid)
-        // @ts-ignore
-        console.log(response.data.map((m) => m.building.buildingName))
-        console.log(response.data[0].building)
     }
 
     const BookHall = async () => {
@@ -81,11 +75,30 @@ function DMOBookHall() {
             hallId: chosenHalls,
             classId: chosenClass,
         })
-        console.log(response.data)
+        const d = new Date();
+        const hours = d.getHours();
+        const minutes = d.getMinutes()
+        if (response.data === true) {
+            console.log("you book")
+            MockHistoryBookHall.push(
+                {
+                    name: chosenTeacher,
+                    data: hours +":"+minutes,
+                    hall: 201,
+                    class: "2k"
+                }
+            )
+            GetHistory()
+            console.log(history)
+        }
+        else {
+            console.log("hall is book other user ")
+        }
+
+        await GetHistory()
     }
     const chooseTeacher = (e: any) => {
         setChosenTeacher(e.value)
-        console.log(chosenTeacher)
 
     }
 
@@ -110,6 +123,7 @@ function DMOBookHall() {
     }
 
 
+
     return (
         <div className="App">
             <div style={{display: "block", margin: "0"}}>
@@ -120,9 +134,11 @@ function DMOBookHall() {
                             1
                         </Box>
                         {
-                            MockHistoryBookHall.map((mock) =>
-                                <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                                    <h2>{mock.firstName} {mock.secondName}</h2>
+                            history.reverse().map((mock) =>
+                                <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"}
+                                     background={color2}>
+                                    <h2>{mock.name}</h2>
+                                    <h2>{mock.data}</h2>
                                 </Box>
                             )
                         }
@@ -146,6 +162,7 @@ function DMOBookHall() {
                         <Button h={"10vh"} onClick={BookHall}>book</Button>
                     </Flex>
                 </Center>
+                {/*<button onClick={BookNew}>chek</button>*/}
             </div>
         </div>
     );

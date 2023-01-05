@@ -1,77 +1,54 @@
-export const MockHistoryBookHall = [
+export interface IHistory {
+    name: string,
+
+    data: string,
+    hall: number,
+    class: string
+}
+const d = new Date();
+let hours = d.getHours();
+const minutes = d.getMinutes()
+export const MockHistoryBookHall: IHistory[] = [
     {
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
     },
     {
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
-    },
-    {
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+    }, {
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
-    },
-    {
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+    }, {
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
-    },
-    {
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+    }, {
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
-    },
-    {
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+    }, {
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
-    }
-    ,{
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+    }, {
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
-    }
-    ,
-    {
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
-        class: "2k"
-    },{
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
-        class: "2k"
-    },{
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
-        class: "2k"
-    },{
-        firstName : "Grzegorz",
-        secondName : "Bartko",
-        data: "10:00",
-        hall: "206",
+    }, {
+        name: "Grzegorz" + " " + "Bartko",
+        data: hours + ":" + minutes,
+        hall: 206,
         class: "2k"
     },
 ]
