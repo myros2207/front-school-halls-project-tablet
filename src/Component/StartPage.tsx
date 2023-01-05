@@ -1,18 +1,31 @@
-import {Box, Button} from '@chakra-ui/react';
+import {Box, Button, Center} from '@chakra-ui/react';
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 
 
 const StartPage = () => {
+    const a = "Mira"
+    // @ts-ignore
+    // console.log(a.split(''))
+    // const arry = a.split('')
+    // if (arry[0] === "M"){
+    //     console.log("okkk")
+    // }
+    const languages = ["Java", "TypeScript", "C#", "JavaScript", "Julia"]
+
+    const jLanguages = languages.filter(function (language) {
+        return language.startsWith("J")
+    })
+
+    console.log(jLanguages)
     const navigate = useNavigate()
     return (
-        <div>
-            <Box>
-               <Button onClick={() => navigate("/pko")}>PKO</Button>
-               <Button onClick={() => navigate("/dmo")}>DMO</Button>
-
+        <Center h={"100vh"}>
+            <Box border={"1px solid"} p={"50px"} borderRadius={"5px"}>
+               <Button m={"10px"} onClick={() => navigate("/pko")}>PKO</Button>
+               <Button m={"10px"} onClick={() => navigate("/dmo")}>Dmowskiego</Button>
             </Box>
-        </div>
+        </Center>
     );
 };
 

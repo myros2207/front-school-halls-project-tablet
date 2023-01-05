@@ -1,9 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import Select from "react-select";
-import {Box, Button, Center, Container, Flex, Select as SelectChakra, Text} from '@chakra-ui/react'
+import {
+    Box,
+    Button,
+    Center,
+    Container,
+    Flex,
+    Select as SelectChakra,
+    Tab, TabPanel,
+    TabPanels,
+    Tabs,
+    Text
+} from '@chakra-ui/react'
 import axios from "axios";
 import {color1, color2, color3, color4} from "./Color";
 import {IHistory, MockHistoryBookHall} from "./mock";
+import HisotoryBookComponent from "./HisotoryBookComponent";
+import FreeHallsComponent from "./FreeHallsComponent";
 
 function DMOBookHall() {
 
@@ -55,7 +68,7 @@ function DMOBookHall() {
         setClasses(arr)
     }
     const GetHalls = async () => {
-        const response = await axios.get("http://localhost:3000/halls")
+        const response = await axios.get("http://localhost:3000/freeHalls")
         const arr = []
         for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].building.buildingName === "DMO") {
@@ -83,15 +96,14 @@ function DMOBookHall() {
             MockHistoryBookHall.push(
                 {
                     name: chosenTeacher,
-                    data: hours +":"+minutes,
+                    data: hours + ":" + minutes,
                     hall: 201,
                     class: "2k"
                 }
             )
             GetHistory()
             console.log(history)
-        }
-        else {
+        } else {
             console.log("hall is book other user ")
         }
 
@@ -123,47 +135,39 @@ function DMOBookHall() {
     }
 
 
-
     return (
-        <div className="App">
-            <div style={{display: "block", margin: "0"}}>
-                <Center background={color1} w={"100%"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
-                    <Box overflow={"auto"} w={"100%"} h={"85vh"}>
-                        <h1>Book hall history</h1>
-                        <Box margin={"auto"} h={"5rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            1
-                        </Box>
-                        {
-                            history.reverse().map((mock) =>
-                                <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"}
-                                     background={color2}>
-                                    <h2>{mock.name}</h2>
-                                    <h2>{mock.data}</h2>
-                                </Box>
-                            )
-                        }
-                    </Box>
-                    <Flex p={"1rem"} w={"99vw"} h={"100%"} background={color3} justifyContent={"center"}>
-                        <Box>
-                            <Text>Imię</Text>
-                            <Select onChange={chooseTeacher} options={teachers} isSearchable={true}
-                                    styles={reactSelectStyles}/>
-                        </Box>
-                        <Box>
-                            <Text>Sala</Text>
-                            <Select onChange={chooseHalls} options={halls} isSearchable={true}
-                                    styles={reactSelectStyles}/>
-                        </Box>
-                        <Box>
-                            <Text>Klasa</Text>
-                            <Select onChange={chooseClass} options={classes} isSearchable={true}
-                                    styles={reactSelectStyles}/>
-                        </Box>
-                        <Button h={"10vh"} onClick={BookHall}>book</Button>
-                    </Flex>
-                </Center>
-                {/*<button onClick={BookNew}>chek</button>*/}
-            </div>
+        <div>
+            <Center background={color1} w={"100%"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
+                <Tabs w={"100%"} height={"90vh"}>
+                    <Center>
+                        <Flex>
+                            <Tab>History</Tab>
+                            <Tab>Free hall</Tab>
+                        </Flex>
+                    </Center>
+                    <TabPanels>
+                        <TabPanel>
+                            <HisotoryBookComponent/>
+                        </TabPanel>
+                        <TabPanel>
+                            <FreeHallsComponent/>
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
+                <Flex p={"h1rem"} w={"100vw"} h={"100%"} background={color3} justifyContent={"center"}>
+
+                    <Select placeholder={"Imie Nazwisko"} onChange={chooseTeacher} options={teachers}
+                            isSearchable={true}
+                            styles={reactSelectStyles}/>
+                    <Select placeholder={"Sala"} onChange={chooseHalls} options={halls} isSearchable={true}
+                            styles={reactSelectStyles}/>
+                    <Select placeholder={"Klasa"} onChange={chooseClass} options={classes} isSearchable={true}
+                            styles={reactSelectStyles}/>
+                    <Button h={"10vh"} onClick={BookHall}>book</Button>
+                </Flex>
+            </Center>
+            {/*<button onClick={BookNew}>chek</button>*/}
+            {/*</div>*/}
         </div>
     );
 }

@@ -1,11 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import Select from "react-select";
-import {Box, Button, Center, Container, Flex, Select as SelectChakra, Text} from '@chakra-ui/react'
+import {
+    Box,
+    Button,
+    Center,
+    Container,
+    Flex,
+    Select as SelectChakra,
+    Tab, TabPanel,
+    TabPanels,
+    Tabs,
+    Text
+} from '@chakra-ui/react'
 import axios from "axios";
 import {color1, color2, color3, color4} from "./Color";
 import {IHistory, MockHistoryBookHall} from "./mock";
+import HisotoryBookComponent from "./HisotoryBookComponent";
+import FreeHallsComponent from "./FreeHallsComponent";
 
-function PKOBookHall() {
+function DMOBookHall() {
 
     const [teachers, setTeachers] = useState<any>([])
     const [classes, setClasses] = useState<any>([])
@@ -13,14 +26,19 @@ function PKOBookHall() {
     const [chosenTeacher, setChosenTeacher] = useState("")
     const [chosenClass, setChosenClass] = useState("")
     const [chosenHalls, setChosenHalls] = useState("")
-
+    const [bookLesson, setBookLesson] = useState<IHistory[]>([])
+    const [history, setHistory] = useState<IHistory[]>([])
 
     useEffect(() => {
         GetClasses()
         GetTeachers()
         GetHalls()
+        GetHistory()
     }, [])
 
+    const GetHistory = () => {
+        setHistory(MockHistoryBookHall)
+    }
     const GetTeachers = async () => {
         const response = await axios.get("http://localhost:3000/teachers")
 
@@ -49,15 +67,11 @@ function PKOBookHall() {
         }
         setClasses(arr)
     }
-
     const GetHalls = async () => {
-        const response = await axios.get("http://localhost:3000/halls")
-
+        const response = await axios.get("http://localhost:3000/freeHalls")
         const arr = []
         for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].building.buildingName === "PKO") {
-
-
                 arr.push({
                         label: response.data[i].hallNumber + " " + response.data[i].hallType,
                         value: response.data[i].hallId
@@ -65,15 +79,7 @@ function PKOBookHall() {
                 )
             }
         }
-        // if  (response.data.building.buildingName == "PKO"){
-        //     console.log("Ok")
-        // }
         setHalls(arr)
-        console.log(arr)
-        // console.log(response.data.hallid)
-        // @ts-ignore
-        console.log(response.data.map((m) => m.building.buildingName))
-        console.log(response.data[0].building)
     }
 
     const BookHall = async () => {
@@ -82,12 +88,29 @@ function PKOBookHall() {
             hallId: chosenHalls,
             classId: chosenClass,
         })
-        console.log(response.data)
+        const d = new Date();
+        const hours = d.getHours();
+        const minutes = d.getMinutes()
+        if (response.data === true) {
+            console.log("you book")
+            MockHistoryBookHall.push(
+                {
+                    name: chosenTeacher,
+                    data: hours + ":" + minutes,
+                    hall: 201,
+                    class: "2k"
+                }
+            )
+            GetHistory()
+            console.log(history)
+        } else {
+            console.log("hall is book other user ")
+        }
 
+        await GetHistory()
     }
     const chooseTeacher = (e: any) => {
         setChosenTeacher(e.value)
-        console.log(chosenTeacher)
 
     }
 
@@ -113,44 +136,40 @@ function PKOBookHall() {
 
 
     return (
-        <div className="App">
-            <div style={{display: "block", margin: "0"}}>
-                <Center background={color1} w={"100%"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
-                    <Box overflow={"auto"} w={"100%"} h={"85vh"}>
-                        <h1>Book hall history PKO</h1>
-                        <Box margin={"auto"} h={"5rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                            1
-                        </Box>
-                        {
-                            MockHistoryBookHall.map((mock) =>
-                                <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                                    <h2>{mock.name} </h2>
-                                </Box>
-                            )
-                        }
-                    </Box>
-                    <Flex p={"1rem"} w={"99vw"} h={"100%"} background={color3} justifyContent={"center"}>
-                        <Box>
-                            <Text>Imię</Text>
-                            <Select onChange={chooseTeacher} options={teachers} isSearchable={true}
-                                    styles={reactSelectStyles}/>
-                        </Box>
-                        <Box>
-                            <Text>Sala</Text>
-                            <Select onChange={chooseHalls} options={halls} isSearchable={true}
-                                    styles={reactSelectStyles}/>
-                        </Box>
-                        <Box>
-                            <Text>Klasa</Text>
-                            <Select onChange={chooseClass} options={classes} isSearchable={true}
-                                    styles={reactSelectStyles}/>
-                        </Box>
-                        <Button h={"10vh"} onClick={BookHall}>book</Button>
-                    </Flex>
-                </Center>
-            </div>
+        <div>
+            <Center background={color1} w={"100%"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
+                <Tabs w={"100%"} height={"90vh"}>
+                    <Center>
+                        <Flex>
+                            <Tab>History</Tab>
+                            <Tab>Free hall</Tab>
+                        </Flex>
+                    </Center>
+                    <TabPanels>
+                        <TabPanel>
+                            <HisotoryBookComponent/>
+                        </TabPanel>
+                        <TabPanel>
+                            <FreeHallsComponent/>
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
+                <Flex p={"h1rem"} w={"100vw"} h={"100%"} background={color3} justifyContent={"center"}>
+
+                    <Select placeholder={"Imie Nazwisko"} onChange={chooseTeacher} options={teachers}
+                            isSearchable={true}
+                            styles={reactSelectStyles}/>
+                    <Select placeholder={"Sala"} onChange={chooseHalls} options={halls} isSearchable={true}
+                            styles={reactSelectStyles}/>
+                    <Select placeholder={"Klasa"} onChange={chooseClass} options={classes} isSearchable={true}
+                            styles={reactSelectStyles}/>
+                    <Button h={"10vh"} onClick={BookHall}>book</Button>
+                </Flex>
+            </Center>
+            {/*<button onClick={BookNew}>chek</button>*/}
+            {/*</div>*/}
         </div>
     );
 }
 
-export default PKOBookHall;
+export default DMOBookHall;
