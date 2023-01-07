@@ -1,7 +1,7 @@
 import React from 'react';
-import DMOBookHall from "./Component/DMOBookHall";
+import DMOBookHall from "./Component/DMO/DMOBookHall";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import PKOBookHall from "./Component/PKOBookHall";
+import PKOBookHall from "./Component/PKO/PKOBookHall";
 import StartPage from "./Component/StartPage";
 // require("dotenv").config()
 

@@ -13,10 +13,11 @@ import {
     Text
 } from '@chakra-ui/react'
 import axios from "axios";
-import {color1, color2, color3, color4} from "./Color";
-import {IHistory, MockHistoryBookHall} from "./mock";
-import HisotoryBookComponent from "./HisotoryBookComponent";
-import FreeHallsComponent from "./FreeHallsComponent";
+import {color1, color2, color3, color4} from "../Color";
+import {IHistory, MockHistoryBookHall} from "../mock";
+import HisotoryBookComponent from "../HisotoryBookComponent";
+import FreeHallsComponent from "../FreeHalls/FreeHallsComponent";
+import FreeHalls from "../FreeHalls/FreeHalls";
 
 function DMOBookHall() {
 
@@ -136,39 +137,24 @@ function DMOBookHall() {
 
 
     return (
-        <div>
-            <Center background={color1} w={"100%"} h={"full"} minHeight={"100%"} flexDirection={"column"}>
-                <Tabs w={"100%"} height={"90vh"}>
-                    <Center>
-                        <Flex>
-                            <Tab>History</Tab>
-                            <Tab>Free hall</Tab>
-                        </Flex>
-                    </Center>
-                    <TabPanels>
-                        <TabPanel>
-                            <HisotoryBookComponent/>
-                        </TabPanel>
-                        <TabPanel>
-                            <FreeHallsComponent/>
-                        </TabPanel>
-                    </TabPanels>
-                </Tabs>
-                <Flex p={"h1rem"} w={"100vw"} h={"100%"} background={color3} justifyContent={"center"}>
-
-                    <Select placeholder={"Imie Nazwisko"} onChange={chooseTeacher} options={teachers}
-                            isSearchable={true}
-                            styles={reactSelectStyles}/>
-                    <Select placeholder={"Sala"} onChange={chooseHalls} options={halls} isSearchable={true}
-                            styles={reactSelectStyles}/>
-                    <Select placeholder={"Klasa"} onChange={chooseClass} options={classes} isSearchable={true}
-                            styles={reactSelectStyles}/>
-                    <Button h={"10vh"} onClick={BookHall}>book</Button>
-                </Flex>
-            </Center>
-            {/*<button onClick={BookNew}>chek</button>*/}
-            {/*</div>*/}
-        </div>
+        <Box background={color1} w={"100%"} h={"100vh"} minHeight={"100%"} flexDirection={"column"}>
+            <Tabs w={"100%"} height={"90vh"}>
+                <Center>
+                    <Flex>
+                        <Tab>Free hall</Tab>
+                        <Tab>History</Tab>
+                    </Flex>
+                </Center>
+                <TabPanels>
+                    <TabPanel>
+                        <FreeHalls/>
+                    </TabPanel>
+                    <TabPanel>
+                        <HisotoryBookComponent/>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
+        </Box>
     );
 }
 
