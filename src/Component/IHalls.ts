@@ -7,7 +7,7 @@ export interface IFreeHals {
 
 export interface IOccupiedHalls {
     HallId: number;
-    Class: number | null;
+    ClassName:string;
     HallNumber: string;
     Teacher: string;
 }

@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import {color1, color2, color3, color4} from "../Color";
 import {IHistory, MockHistoryBookHall} from "../mock";
-import HisotoryBookComponent from "../HisotoryBookComponent";
+import HisotoryBookComponent from "../HistoryBookHall/HisotoryBookComponent";
 import FreeHallsComponent from "../FreeHalls/FreeHallsComponent";
 import FreeHalls from "../FreeHalls/FreeHalls";
 import OccupiedComponent from "../Occupied/OccupiedComponent";

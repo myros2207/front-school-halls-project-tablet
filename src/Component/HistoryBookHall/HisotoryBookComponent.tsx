@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Box} from "@chakra-ui/react";
-import {color2} from "./Color";
-import {IHistory, MockHistoryBookHall} from "./mock";
+import {color2} from "../Color";
+import {IHistory, MockHistoryBookHall} from "../mock";
 import axios from 'axios';
 
 const HistoryBookComponent = () => {

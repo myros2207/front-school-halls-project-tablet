@@ -45,7 +45,7 @@ const OccupiedComponent = (halls: IOccupiedHalls) => {
                         <Flex>
                             <Text fontWeight={"bold"} fontSize={"2rem"} p={"10px"}>{halls.HallNumber}</Text>
                             <Text fontSize={"2rem"} p={"10px"}>{halls.Teacher}</Text>
-
+                            <Text fontSize={"2rem"} p={"10px"}>{halls.ClassName}</Text>
                         </Flex>
                     </Box>
                     <Box alignItems={"center"} maxWidth={"auto"}>

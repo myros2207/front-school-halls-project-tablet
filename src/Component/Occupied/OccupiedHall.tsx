@@ -14,13 +14,16 @@ const Occupied = () => {
     const GetOccupiedHalls = async () => {
         const response = await axios.get("http://localhost:9087/occupiedHalls")
         setAllOccupedHalls(response.data)
+        console.log(response.data)
     }
     return (
 
         <div>
             {
                 allOccupeidHalls.map((halls:any) =>
-                    <OccupiedComponent HallId={halls.hallId} Class={halls.class} HallNumber={halls.hallNumber} Teacher={halls.teacher}/>
+                    <>
+                    <OccupiedComponent HallId={halls.hallId} ClassName={halls.class.className} HallNumber={halls.hallNumber} Teacher={halls.teacher.teacherFirstName + " " + halls.teacher.teacherSecondName}/>
+                        </>
                 )
             }
         </div>
