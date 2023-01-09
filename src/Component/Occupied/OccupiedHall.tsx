@@ -5,7 +5,8 @@ import {useState} from 'react';
 import OccupiedComponent from './OccupiedComponent';
 
 const Occupied = () => {
-    const [allOccupeidHalls, setAllOccupedHalls] = useState<IOccupiedHalls[]>([])
+    const [allOccupiedHalls, setAllOccupiedHalls] = useState<IOccupiedHalls[]>([])
+    const [emptyOccupiedHalls, setEmptyOccupiedHalls] = useState<any>("")
     useEffect(() => {
         GetOccupiedHalls()
     }, []);
@@ -13,19 +14,37 @@ const Occupied = () => {
 
     const GetOccupiedHalls = async () => {
         const response = await axios.get("http://localhost:9087/occupiedHalls")
-        setAllOccupedHalls(response.data)
-        console.log(response.data)
+        const array = []
+        for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].building.buildingName === localStorage.getItem("Building")) {
+                array.push( response.data[i])
+            }
+        }
+        setAllOccupiedHalls(array)
+        console.log(array)
+        if  (array.length === 0 ){
+            setEmptyOccupiedHalls(
+                <>
+                    <h2>niema jescze rezerwacji</h2>
+                </>
+            )
+        }
     }
     return (
 
         <div>
             {
-                allOccupeidHalls.map((halls:any) =>
+                allOccupiedHalls.map((halls:any) =>
                     <>
                     <OccupiedComponent HallId={halls.hallId} ClassName={halls.class.className} HallNumber={halls.hallNumber} Teacher={halls.teacher.teacherFirstName + " " + halls.teacher.teacherSecondName}/>
                         </>
                 )
             }
+            <div>
+            {
+                emptyOccupiedHalls
+            }
+            </div>
         </div>
     );
 };

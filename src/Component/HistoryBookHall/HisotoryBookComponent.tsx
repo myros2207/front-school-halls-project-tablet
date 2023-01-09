@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Box} from "@chakra-ui/react";
+import {Box, Button, Flex, Text} from "@chakra-ui/react";
 import {color2} from "../Color";
 import {IHistory, MockHistoryBookHall} from "../mock";
 import axios from 'axios';
+import FreeHallsComponent from "../FreeHalls/FreeHallsComponent";
 
 const HistoryBookComponent = () => {
     const [history, setHistory] = useState([])
+    const [sliceDate, setSliceDate] = useState<any>()
+    const [sliceTime, setSliceTime] = useState("")
 
     useEffect(() => {
         GetHistory()
@@ -16,22 +19,25 @@ const HistoryBookComponent = () => {
         setHistory(response.data)
     }
     return (
-            <Box overflow={"auto"} w={"100%"} h={"85vh"}>
-                <h1>Book hall history</h1>
-                <Box margin={"auto"} h={"5rem"} borderRadius={"10px"} w={"95%"} background={color2}>
-                    1
-                </Box>
-                {
-                    history.reverse().map((mock:any) =>
-                        <Box h={"5rem"} m={"auto"} mt={"1rem"} borderRadius={"10px"} w={"95%"}
-                             background={color2}>
-                            <h2>{mock.teacher.teacherFirstName } {mock.teacher.teacherSecondName}</h2>
-                        </Box>
-                    )
-                }
-            </Box>
+        <Box overflow={"auto"} w={"100%"} h={"90vh"} justifyContent={"space-between"}>
+            {
+                history.map((his: any) =>
+                    <Box mt={"5px"} background={color2}>
+                        <Flex>
+                            <h2></h2>
+                            <Text fontWeight={"bold"} fontSize={"2rem"}
+                                  p={"10px"}>{his.teacher.teacherFirstName} {his.teacher.teacherSecondName}</Text>
+                            <Text fontSize={"2rem"} p={"10px"}>{his.reservedDate.slice(0, 10)}</Text>
+                            <Text fontSize={"2rem"} p={"10px"}>{his.reservedDate.slice(11, 19)}</Text>
+                            {/*<Text fontSize={"2rem"} p={"10px"}>{halls.ClassName}</Text>*/}
+                        </Flex>
+                    </Box>
+                )
+            }
 
-    );
+
+        </Box>
+);
 };
 
 export default HistoryBookComponent;

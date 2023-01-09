@@ -17,13 +17,20 @@ const StartPage = () => {
         return language.startsWith("J")
     })
 
+
     console.log(jLanguages)
     const navigate = useNavigate()
     return (
         <Center h={"100vh"}>
             <Box border={"1px solid"} p={"50px"} borderRadius={"5px"}>
-               <Button m={"10px"} onClick={() => navigate("/pko")}>PKO</Button>
-               <Button m={"10px"} onClick={() => navigate("/dmo")}>Dmowskiego</Button>
+               <Button m={"10px"} onClick={() => {
+                   navigate("/pko")
+                   localStorage.setItem("Building", "PKO")
+               }
+               }>PKO</Button>
+               <Button m={"10px"} onClick={() => {navigate("/dmo")
+                localStorage.setItem("Building", "DMO")
+               }}>Dmowskiego</Button>
             </Box>
         </Center>
     );

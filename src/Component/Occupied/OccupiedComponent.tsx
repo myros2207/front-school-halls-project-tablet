@@ -52,8 +52,8 @@ const OccupiedComponent = (halls: IOccupiedHalls) => {
                         <Button h={"2rem"} colorScheme='blue' onClick={VacateHall}>Vacate</Button>
                     </Box>
                 </Flex>
-            </Box>
 
+            </Box>
 
         </Box>
     );
