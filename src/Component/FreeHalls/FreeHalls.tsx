@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import FreeHallsComponent from "./FreeHallsComponent";
 import axios from "axios";
 import {IFreeHals} from "../IHalls";
-import {Box} from "@chakra-ui/react";
+import {Box, Text} from "@chakra-ui/react";
 
 const FreeHalls = () => {
     const [allFreeHalls, setAllFreeHalls] = useState<IFreeHals[]>([])
@@ -27,7 +27,7 @@ const FreeHalls = () => {
         if  (array.length === 0 ){
             setEmptyFreeHalls(
                 <>
-                    <h2>niema wolnych sall</h2>
+                    <Text fontSize={"4rem"} color={"red"}>Niema wolnych sall!</Text>
                 </>
             )
         }
@@ -36,14 +36,12 @@ const FreeHalls = () => {
     return (
         <Box overflow={"auto"} w={"100%"} h={"90vh"} justifyContent={"space-between"}>
             {
-                allFreeHalls.map((halls) =>
-              // @ts-ignore
-            <FreeHallsComponent HallId={halls.hallId} HallType={halls.hallType} HallNumber={halls.hallNumber} SeatsAmount={halls.seatsAmount}/>
-                )
+                allFreeHalls.map((halls:IFreeHals | any) =>
+            <FreeHallsComponent HallId={halls.hallId} HallType={halls.hallType} HallNumber={halls.hallNumber} SeatsAmount={halls.seatsAmount}/>)
             }
-            <div>{
+            <Box justifyContent={"center"} display={"flex"} alignItems={"center"}>{
                 emptyFreeHalls
-            }</div>
+            }</Box>
         </Box>
     );
 };

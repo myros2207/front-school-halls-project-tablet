@@ -1,3 +1,6 @@
+import {Box, Text} from "@chakra-ui/react";
+import React from "react";
+
 export interface IFreeHals {
     HallId: number;
     HallType: string;
@@ -10,4 +13,12 @@ export interface IOccupiedHalls {
     ClassName:string;
     HallNumber: string;
     Teacher: string;
+}
+
+export interface IHistoryBook {
+    Teacher: string;
+    ReservedDate: string;
+
+    VacateDate: string;
+    HallNumber: string
 }

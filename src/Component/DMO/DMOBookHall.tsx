@@ -13,13 +13,14 @@ import {
     Text
 } from '@chakra-ui/react'
 import axios from "axios";
-import {color1, color2, color3, color4} from "../Color";
+import {color1, color2, color3, color4} from "../Styled/Color";
 import {IHistory, MockHistoryBookHall} from "../mock";
 import HisotoryBookComponent from "../HistoryBookHall/HisotoryBookComponent";
 import FreeHallsComponent from "../FreeHalls/FreeHallsComponent";
 import FreeHalls from "../FreeHalls/FreeHalls";
 import OccupiedComponent from "../Occupied/OccupiedComponent";
 import OccupiedHall from '../Occupied/OccupiedHall';
+import HistoryBook from "../HistoryBookHall/HistoryBook";
 
 function DMOBookHall() {
 
@@ -92,9 +93,9 @@ function DMOBookHall() {
                 <Tabs w={"100%"} height={"90vh"}>
                     <Center>
                         <Flex>
-                            <Tab>Free hall</Tab>
-                            <Tab>Occupied</Tab>
-                            <Tab>History</Tab>
+                            <Tab>Wolne sale</Tab>
+                            <Tab>Zajęte sale</Tab>
+                            <Tab>Historia wizęcia</Tab>
                         </Flex>
                     </Center>
                     <TabPanels>
@@ -105,7 +106,7 @@ function DMOBookHall() {
                             <OccupiedHall/>
                         </TabPanel>
                         <TabPanel>
-                            <HisotoryBookComponent/>
+                            <HistoryBook/>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

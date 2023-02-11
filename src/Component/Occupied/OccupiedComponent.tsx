@@ -10,10 +10,11 @@ import {
     Flex,
     Text
 } from "@chakra-ui/react";
-import {color2, color3} from "../Color";
+import {color2, color3} from "../Styled/Color";
 import Select from "react-select";
 import axios from "axios";
 import { IOccupiedHalls} from "../IHalls";
+import {ButtonToOpenGetVacate} from "../Styled/GlobalStyled";
 
 
 const OccupiedComponent = (halls: IOccupiedHalls) => {
@@ -49,7 +50,7 @@ const OccupiedComponent = (halls: IOccupiedHalls) => {
                         </Flex>
                     </Box>
                     <Box alignItems={"center"} maxWidth={"auto"}>
-                        <Button h={"2rem"} colorScheme='blue' onClick={VacateHall}>Vacate</Button>
+                        <ButtonToOpenGetVacate onClick={VacateHall}>Vacate</ButtonToOpenGetVacate>
                     </Box>
                 </Flex>
 

@@ -13,12 +13,13 @@ import {
     Text
 } from '@chakra-ui/react'
 import axios from "axios";
-import {color1, color2, color3, color4} from "../Color";
+import {color1, color2, color3, color4} from "../Styled/Color";
 import {IHistory, MockHistoryBookHall} from "../mock";
 import HisotoryBookComponent from "../HistoryBookHall/HisotoryBookComponent";
 import FreeHallsComponent from "../FreeHalls/FreeHallsComponent";
 import FreeHalls from "../FreeHalls/FreeHalls";
 import OccupiedHall from "../Occupied/OccupiedHall";
+import HistoryBook from "../HistoryBookHall/HistoryBook";
 
 function DMOBookHall() {
 
@@ -83,58 +84,58 @@ function DMOBookHall() {
         }
         setHalls(arr)
     }
-
-    const BookHall = async () => {
-        const response = await axios.patch("http://localhost:3000/bookHall", {
-            teacherId: chosenTeacher,
-            hallId: chosenHalls,
-            classId: chosenClass,
-        })
-        const d = new Date();
-        const hours = d.getHours();
-        const minutes = d.getMinutes()
-        if (response.data === true) {
-            console.log("you book")
-            MockHistoryBookHall.push(
-                {
-                    name: chosenTeacher,
-                    data: hours + ":" + minutes,
-                    hall: 201,
-                    class: "2k"
-                }
-            )
-            GetHistory()
-            console.log(history)
-        } else {
-            console.log("hall is book other user ")
-        }
-
-        await GetHistory()
-    }
-    const chooseTeacher = (e: any) => {
-        setChosenTeacher(e.value)
-
-    }
-
-    const chooseClass = (e: any) => {
-        setChosenClass(e.value)
-    }
-    const chooseHalls = (e: any) => {
-        setChosenHalls(e.value)
-    }
-
-    const reactSelectStyles = {
-        control: (base: any) => ({
-            width: "20vw",
-            border: "2px solid ",
-            // margin: "2rem",
-            height: "10vh",
-            borderRadius: "5px"
-        }),
-        menu: (base: any) => ({
-            // width: "10rem",
-        }),
-    }
+    //
+    // const BookHall = async () => {
+    //     const response = await axios.patch("http://localhost:3000/bookHall", {
+    //         teacherId: chosenTeacher,
+    //         hallId: chosenHalls,
+    //         classId: chosenClass,
+    //     })
+    //     const d = new Date();
+    //     const hours = d.getHours();
+    //     const minutes = d.getMinutes()
+    //     if (response.data === true) {
+    //         console.log("you book")
+    //         MockHistoryBookHall.push(
+    //             {
+    //                 name: chosenTeacher,
+    //                 data: hours + ":" + minutes,
+    //                 hall: 201,
+    //                 class: "2k"
+    //             }
+    //         )
+    //         GetHistory()
+    //         console.log(history)
+    //     } else {
+    //         console.log("hall is book other user ")
+    //     }
+    //
+    //     await GetHistory()
+    // }
+    // const chooseTeacher = (e: any) => {
+    //     setChosenTeacher(e.value)
+    //
+    // }
+    //
+    // const chooseClass = (e: any) => {
+    //     setChosenClass(e.value)
+    // }
+    // const chooseHalls = (e: any) => {
+    //     setChosenHalls(e.value)
+    // }
+    //
+    // const reactSelectStyles = {
+    //     control: (base: any) => ({
+    //         width: "20vw",
+    //         border: "2px solid ",
+    //         // margin: "2rem",
+    //         height: "10vh",
+    //         borderRadius: "5px"
+    //     }),
+    //     menu: (base: any) => ({
+    //         // width: "10rem",
+    //     }),
+    // }
 
 
     return (
@@ -142,9 +143,9 @@ function DMOBookHall() {
             <Tabs w={"100%"} height={"90vh"}>
                 <Center>
                     <Flex>
-                        <Tab>Free hall</Tab>
-                        <Tab>Occupied</Tab>
-                        <Tab>History</Tab>
+                        <Tab>Wolne sale</Tab>
+                        <Tab>Zajęte sale</Tab>
+                        <Tab>Historia wizęcia</Tab>
                     </Flex>
                 </Center>
                 <TabPanels>
@@ -155,7 +156,7 @@ function DMOBookHall() {
                         <OccupiedHall/>
                     </TabPanel>
                     <TabPanel>
-                        <HisotoryBookComponent/>
+                        <HistoryBook/>
                     </TabPanel>
                 </TabPanels>
             </Tabs>

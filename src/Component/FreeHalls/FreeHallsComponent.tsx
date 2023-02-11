@@ -12,9 +12,10 @@ import {
     Stack, Text,
     useDisclosure
 } from "@chakra-ui/react";
-import {color2, color3} from "../Color";
+import {color2, color3} from "../Styled/Color";
 import {IFreeHals} from "../IHalls";
 import Select from "react-select";
+import {ButtonToOpenGetVacate} from "../Styled/GlobalStyled";
 
 
 const FreeHallsComponent = (halls: IFreeHals) => {
@@ -35,7 +36,7 @@ const FreeHallsComponent = (halls: IFreeHals) => {
                 classId: chosenClass,
             })
             console.log(response.data)
-            if (response.data === true){
+            if (response.data === true) {
                 window.location.reload()
             }
         }
@@ -49,7 +50,6 @@ const FreeHallsComponent = (halls: IFreeHals) => {
                     value: response.data[i].teacherId
                 })
             }
-
             setTeachers(arr)
         }
 
@@ -77,7 +77,6 @@ const FreeHallsComponent = (halls: IFreeHals) => {
             setChosenClass(e.value)
         }
 
-
         const reactSelectStyles = {
             control: (base: any) => ({
                 width: "20vw",
@@ -93,7 +92,7 @@ const FreeHallsComponent = (halls: IFreeHals) => {
 
         return (
             <Box>
-                <Box  background={color2} mt={"5px"}>
+                <Box background={color2} mt={"5px"}>
                     <Flex justifyContent={"space-between"}>
                         <Box maxWidth={"auto"}>
                             <Flex>
@@ -103,7 +102,7 @@ const FreeHallsComponent = (halls: IFreeHals) => {
                             </Flex>
                         </Box>
                         <Box alignItems={"center"} maxWidth={"auto"}>
-                            <Button h={"2rem"} colorScheme='blue' onClick={onOpen}> Open </Button>
+                            <ButtonToOpenGetVacate onClick={onOpen}> Open </ButtonToOpenGetVacate>
                         </Box>
                     </Flex>
                 </Box>
