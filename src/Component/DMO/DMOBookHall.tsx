@@ -57,39 +57,9 @@ function DMOBookHall() {
         setHalls(arr)
     }
 
-    // const BookHall = async () => {
-    //     const response = await axios.patch("http://localhost:9087/bookHall", {
-    //         teacherId: chosenTeacher,
-    //         hallId: chosenHalls,
-    //         classId: chosenClass,
-    //     })
-    //     const d = new Date();
-    //     const hours = d.getHours();
-    //     const minutes = d.getMinutes()
-    //     if (response.data === true) {
-    //         console.log("you book")
-    //         MockHistoryBookHall.push(
-    //             {
-    //                 name: chosenTeacher,
-    //                 data: hours + ":" + minutes,
-    //                 hall: 201,
-    //                 class: "2k"
-    //             }
-    //         )
-    //         GetHistory()
-    //         console.log(history)
-    //     } else {
-    //         console.log("hall is book other user ")
-    //     }
-    //
-    //     await GetHistory()
-    // }
-    //
-    //
-
-
     return (
             <Box background={color1} w={"100%"} h={"100vh"} minHeight={"100%"} flexDirection={"column"}>
+                <h1>{localStorage.getItem("Building")}</h1>
                 <Tabs w={"100%"} height={"90vh"}>
                     <Center>
                         <Flex>
@@ -98,9 +68,10 @@ function DMOBookHall() {
                             <Tab>Historia wizęcia</Tab>
                         </Flex>
                     </Center>
-                    <TabPanels>
+                    <TabPanels> 
                         <TabPanel>
-                            <FreeHalls/>
+                            <h1>2</h1>
+                            {/*<FreeHalls/>*/}
                         </TabPanel>
                         <TabPanel>
                             <OccupiedHall/>
