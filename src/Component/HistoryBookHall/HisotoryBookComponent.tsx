@@ -27,7 +27,7 @@ const HistoryBookComponent = (his: IHistoryBook) => {
     // console.log(newDate.getFullYear())
 
     // @ts-ignore
-    const sliceData = his.VacateDate.slice(0, 10)
+    // const sliceData = his.VacateDate.slice(0, 10)
     // console.log(typeof sliceData)
     return (
         <Box mt={"5px"} background={color2}>

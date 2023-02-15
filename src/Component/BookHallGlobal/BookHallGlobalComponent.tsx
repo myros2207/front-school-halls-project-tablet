@@ -22,7 +22,7 @@ import OccupiedComponent from "../Occupied/OccupiedComponent";
 import OccupiedHall from '../Occupied/OccupiedHall';
 import HistoryBook from "../HistoryBookHall/HistoryBook";
 
-function DMOBookHall() {
+function BookHallGlobal() {
 
 
     const [halls, setHalls] = useState<any>([])
@@ -46,7 +46,7 @@ function DMOBookHall() {
         const response = await axios.get("http://localhost:9087/freeHalls")
         const arr = []
         for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].building.buildingName === "DMO") {
+            if (response.data[i].building.buildingName === localStorage.getItem("Building")) {
                 arr.push({
                         label: response.data[i].hallNumber + " " + response.data[i].hallType,
                         value: response.data[i].hallId
@@ -58,31 +58,31 @@ function DMOBookHall() {
     }
 
     return (
-            <Box background={color1} w={"100%"} h={"100vh"} minHeight={"100%"} flexDirection={"column"}>
-                <h1>{localStorage.getItem("Building")}</h1>
-                <Tabs w={"100%"} height={"90vh"}>
-                    <Center>
-                        <Flex>
-                            <Tab>Wolne sale</Tab>
-                            <Tab>Zajęte sale</Tab>
-                            <Tab>Historia wizęcia</Tab>
-                        </Flex>
-                    </Center>
-                    <TabPanels> 
-                        <TabPanel>
-                            <h1>2</h1>
-                            <FreeHalls/>
-                        </TabPanel>
-                        <TabPanel>
-                            <OccupiedHall/>
-                        </TabPanel>
-                        <TabPanel>
-                            <HistoryBook/>
-                        </TabPanel>
-                    </TabPanels>
-                </Tabs>
-            </Box>
+        <Box background={color1} w={"100%"} h={"100vh"} minHeight={"100%"} flexDirection={"column"}>
+            <h1>{localStorage.getItem("Building")}</h1>
+            <Tabs w={"100%"} height={"90vh"}>
+                <Center>
+                    <Flex>
+                        <Tab>Wolne sale</Tab>
+                        <Tab>Zajęte sale</Tab>
+                        <Tab>Historia wizęcia</Tab>
+                    </Flex>
+                </Center>
+                <TabPanels>
+                    <TabPanel>
+                        <h1>2</h1>
+                        <FreeHalls/>
+                    </TabPanel>
+                    <TabPanel>
+                        <OccupiedHall/>
+                    </TabPanel>
+                    <TabPanel>
+                        <HistoryBook/>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
+        </Box>
     );
 }
 
-export default DMOBookHall;
+export default BookHallGlobal;

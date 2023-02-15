@@ -24,11 +24,12 @@ const StartPage = () => {
         <Center h={"100vh"}>
             <Box border={"1px solid"} p={"50px"} borderRadius={"5px"}>
                <Button m={"10px"} onClick={() => {
-                   navigate("/pko")
+                   navigate("/global")
                    localStorage.setItem("Building", "PKO")
                }
                }>PKO</Button>
-               <Button m={"10px"} onClick={() => {navigate("/dmo")
+               <Button m={"10px"} onClick={() =>
+               {navigate("/global")
                 localStorage.setItem("Building", "DMO")
                }}>Dmowskiego</Button>
             </Box>

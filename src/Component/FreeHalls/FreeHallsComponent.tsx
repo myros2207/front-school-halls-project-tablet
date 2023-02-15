@@ -110,8 +110,6 @@ const FreeHallsComponent = (halls: IFreeHals) => {
                 <Drawer placement={placement} onClose={onClose} isOpen={isOpen}>
                     <DrawerOverlay/>
                     <DrawerContent>
-                        <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader>
-                        <DrawerBody>
                             <h2>{halls.HallId}</h2>
                             <Flex p={"h1rem"} w={"100vw"} h={"100%"} background={color3} justifyContent={"center"}>
                                 <Select placeholder={"Imie Nazwisko"} onChange={chooseTeacher} options={teachers}
@@ -121,8 +119,7 @@ const FreeHallsComponent = (halls: IFreeHals) => {
                                         styles={reactSelectStyles}/>
                                 <Button h={"10vh"} onClick={BookHall}>book</Button>
                             </Flex>
-                        </DrawerBody>
-                    </DrawerContent>
+                    </DrawerContent>    
                 </Drawer>
             </Box>
         );
